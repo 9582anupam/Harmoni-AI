@@ -5,12 +5,12 @@ import {
   getUserResults,
   getAssessmentResults
 } from "../../controllers/assessmentResult.controller.js";
-import { verifyToken } from "../../middlewares/auth.middleware.js";
+import { verifyJWT } from "../../middlewares/auth.middleware.js";
 
 const router = express.Router();
 
 // All routes require authentication
-router.use(verifyToken);
+router.use(verifyJWT);
 
 /**
  * @route POST /api/v1/assessment-results/:assessmentId/submit
