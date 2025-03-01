@@ -3,7 +3,8 @@ import {
   submitAssessmentResult,
   getAssessmentResult,
   getUserResults,
-  getAssessmentResults
+  getAssessmentResults,
+  getResultByUserAndAssessmentId
 } from "../../controllers/assessmentResult.controller.js";
 import { verifyJWT } from "../../middlewares/auth.middleware.js";
 
@@ -17,6 +18,20 @@ router.use(verifyJWT);
  * @desc Submit answers for an assessment
  */
 router.post("/submit/:assessmentId", submitAssessmentResult);
+
+router.get("/getResult/:assessmentId", getResultByUserAndAssessmentId);
+
+
+
+
+
+
+
+
+
+
+
+
 
 /**
  * @route GET /api/v1/assessment-results/result/:resultId
@@ -35,5 +50,9 @@ router.get("/user", getUserResults);
  * @desc Get all results for a specific assessment for the current user
  */
 router.get("/assessment/:assessmentId", getAssessmentResults);
+
+
+
+
 
 export default router;

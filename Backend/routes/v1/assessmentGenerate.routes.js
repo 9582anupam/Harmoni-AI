@@ -8,6 +8,7 @@ import {
     mediaUpload,
     documentUpload
 } from "../../controllers/assessmentGenerate.controller.js";
+import { verifyJWT } from "../../middlewares/auth.middleware.js";
 
 const router = express.Router();
 
@@ -23,7 +24,7 @@ const router = express.Router();
  * 
  * @response {Object} Response object containing assessment questions and metadata
  */
-router.post("/youtube", generateAssessmentFromYoutube);
+router.post("/youtube", verifyJWT, generateAssessmentFromYoutube);
 
 /**
  * @route POST /api/v1/assessmentGenerate/media
@@ -37,7 +38,7 @@ router.post("/youtube", generateAssessmentFromYoutube);
  *
  * @response {Object} Response object containing assessment questions and metadata
  */
-router.post("/media", mediaUpload.fields(mediaFields), generateAssessmentFromMedia);
+router.post("/media", verifyJWT, mediaUpload.fields(mediaFields), generateAssessmentFromMedia);
 
 /**
  * @route POST /api/v1/assessmentGenerate/document
@@ -51,7 +52,7 @@ router.post("/media", mediaUpload.fields(mediaFields), generateAssessmentFromMed
  *
  * @response {Object} Response object containing assessment questions and metadata
  */
-router.post("/document", documentUpload.fields(documentFields), generateAssessmentFromDocument);
+router.post("/document", verifyJWT, documentUpload.fields(documentFields), generateAssessmentFromDocument);
 
 
 /**

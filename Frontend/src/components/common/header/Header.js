@@ -44,7 +44,7 @@ const Header = () => {
         <nav className="bg-slate-950/90 backdrop-blur-sm sticky top-0 z-50 border-b border-cyan-900/30">
         <div className="container mx-auto px-6 py-4">
             <div className="flex items-center justify-between">
-            <div className="flex items-center">
+            <div onClick={()=>{navigate("/")}} className="flex items-center cursor-pointer">
                 <Brain className="h-8 w-8 text-cyan-400" />
                 <span className="ml-2 text-xl font-bold bg-gradient-to-r from-cyan-400 to-indigo-500 bg-clip-text text-transparent">
                 Harmoni-AI
