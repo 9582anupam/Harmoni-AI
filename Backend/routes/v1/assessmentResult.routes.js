@@ -16,7 +16,7 @@ router.use(verifyToken);
  * @route POST /api/v1/assessment-results/:assessmentId/submit
  * @desc Submit answers for an assessment
  */
-router.post("/:assessmentId/submit", submitAssessmentResult);
+router.post("/submit/:assessmentId", submitAssessmentResult);
 
 /**
  * @route GET /api/v1/assessment-results/result/:resultId
