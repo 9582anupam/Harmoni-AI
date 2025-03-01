@@ -96,6 +96,10 @@ const assessmentSchema = new mongoose.Schema({
     attemptedBy: {
         type: [mongoose.Schema.Types.ObjectId],
         ref: "User"
+    },
+    transcript: {
+        type: String,
+        default: null
     }
 }, { timestamps: true });
 

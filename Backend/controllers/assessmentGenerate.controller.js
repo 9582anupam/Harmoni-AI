@@ -133,6 +133,7 @@ const generateAssessmentFromYoutube = async (req, res) => {
         try {
             const pythonResponse = await axios.get(`https://product-answer.vercel.app/api/transcript/${videoId}`, { timeout: 15000 });
             transcript = pythonResponse.data.transcript;
+            transcript = transcript.map((obj) => obj.text).join('\n');
         } catch (error) {
             console.log('Python service failed, falling back to manual extraction');
         }
@@ -174,7 +175,8 @@ const generateAssessmentFromYoutube = async (req, res) => {
                     videoId,
                     type,
                     difficulty,
-                    source: 'youtube'
+                    source: 'youtube',
+                    transcript: JSON.stringify(transcript)
                 },
                 { userId }
             );
@@ -324,7 +326,8 @@ const generateAssessmentFromMedia = async (req, res) => {
                         fileName,
                         type,
                         difficulty,
-                        source: isVideo ? 'video' : 'audio'
+                        source: isVideo ? 'video' : 'audio',
+                        transcript: JSON.stringify(transcript)
                     },
                     { userId }
                 );
@@ -496,7 +499,8 @@ const generateAssessmentFromDocument = async (req, res) => {
                         ...documentMetadata,
                         fileName,
                         type,
-                        difficulty
+                        difficulty,
+                        transcript: JSON.stringify(documentText)
                     },
                     { 
                         userId,

@@ -35,7 +35,8 @@ export const saveAssessment = async (assessmentData, sourceInfo, options = {}) =
       creator: options.userId || null,
       questions: questions,
       tags: [sourceInfo.difficulty, sourceInfo.type],
-      isPublic: true
+      isPublic: true,
+      transcript: sourceInfo.transcript
     });
     
     // Save to database
