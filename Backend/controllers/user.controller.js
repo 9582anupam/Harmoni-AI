@@ -129,8 +129,8 @@ const login = async (req, res) => {
         // Send back the user's information
         return res
             .status(200)
-            .cookie("accessToken", accessToken, options)
-            .cookie("refreshToken", refreshToken, options)
+            .cookie("accessToken", accessToken, )
+            .cookie("refreshToken", refreshToken, )
             .json({
                 message: "User logged in successfully",
                 user: userDetails,
@@ -197,8 +197,8 @@ const refreshAccessToken = async (req, res) => {
 
         return res
             .status(200)
-            .cookie("accessToken", accessToken, options)
-            .cookie("refreshToken", newRefreshToken, options)
+            .cookie("accessToken", accessToken, )
+            .cookie("refreshToken", newRefreshToken, )
             .json({
                 status: 200,
                 data: {
@@ -242,8 +242,8 @@ const logout = async (req, res) => {
         };
         return res
             .status(200)
-            .clearCookie("accessToken", options)
-            .clearCookie("refreshToken", options)
+            .clearCookie("accessToken", )
+            .clearCookie("refreshToken", )
             .json({
                 status: 200,
                 message: "User logged out successfully",
