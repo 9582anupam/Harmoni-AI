@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { CheckCircle, XCircle, Clock, Home, RefreshCw } from "lucide-react"
 import { useParams } from "react-router-dom"
 import { fetchQuizData } from "../../../services/quiz/QuizService"
+import Chatbot from "../chatbot/Chatbot"
 
 const QuizResults = () => {
     const { assessmentId } = useParams()
@@ -219,6 +220,7 @@ const QuizResults = () => {
             </div>
             </div>
         </div>
+        <Chatbot assessmentId={assessmentId} />
         </div>
     )
 }

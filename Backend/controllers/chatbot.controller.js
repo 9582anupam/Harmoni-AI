@@ -1,6 +1,7 @@
 import { generateBotResponse } from "../services/chatbot.service.js";
 import Assessment from "../models/assessment.model.js";
 import { askAssessmentService } from "../services/chatbot.service.js";
+import axios from 'axios';
 
 
 
@@ -18,21 +19,26 @@ const getBotResponse = async (req, res) => {
 
 const askAssessment = async (req, res) => {
     try {
-        const { assessmentId } = req.params;
-        const { question } = req.body;
+        const { question, reference } = req.body;
+        
+        // Format the reference data
+        const formattedReference = {
+            score: reference.result.score,
+            maxScore: reference.result.maxScore,
+            percentage: reference.result.percentage,
+            timeTaken: reference.result.timeTaken,
+            transcript: reference.result.transcript,
+            questions: reference.result.questions
+        };
+
         // extract transcript from assessment model
-        const assessment = await Assessment.findById(assessmentId);
-        const transcript = assessment.transcript;
-        // give transcript and question to chatbot
-        const response = await askAssessmentService(transcript, question);
+        const response = await askAssessmentService(formattedReference, question);
 
         res.status(200).json({
             response,
             status: 200,
             success: true
         });
-
-
     } catch (error) {
         console.error('Error in generating assessment:', error);
         res.status(500).json({
