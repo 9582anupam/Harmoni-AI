@@ -57,17 +57,17 @@ const Header = () => {
                 Home
                 </Link>
                 <Link to="/generatequiz" className="text-slate-300 hover:text-cyan-400 transition-colors">
-                Generate Quiz
+                Generate Assessment
                 </Link>
                 <Link to="/exploreQuiz" className="text-slate-300 hover:text-cyan-400 transition-colors">
-                Explore Quiz
+                Explore Assessment
                 </Link>
-                <Link to="#audience" className="text-slate-300 hover:text-cyan-400 transition-colors">
-                For Who
+                <Link to="/leaderboard" className="text-slate-300 hover:text-cyan-400 transition-colors">
+                LeaderBoard
                 </Link>
-                <Link to="#rewards" className="text-slate-300 hover:text-cyan-400 transition-colors">
+                {/* <Link to="#rewards" className="text-slate-300 hover:text-cyan-400 transition-colors">
                 Rewards
-                </Link>
+                </Link> */}
             </div>
 
             {/* Mobile Menu Button */}

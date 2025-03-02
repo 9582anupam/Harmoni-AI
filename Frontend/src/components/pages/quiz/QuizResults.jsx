@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { CheckCircle, XCircle, Clock, Home, RefreshCw } from "lucide-react"
+import { CheckCircle, XCircle, Clock, Home, RefreshCw, Share2 } from "lucide-react"
 import { useParams } from "react-router-dom"
 import { fetchQuizData } from "../../../services/quiz/QuizService"
 import Chatbot from "../chatbot/Chatbot"
@@ -30,6 +30,25 @@ const QuizResults = () => {
         const secs = seconds % 60
         return `${mins} minute${mins !== 1 ? "s" : ""} and ${secs} second${secs !== 1 ? "s" : ""}`
     }
+
+    const handleShare = () => {
+        const shareText = `Check out this quiz on Harmoni-AI!\n\nTry it here: ${window.location.origin}/attemptquiz/${assessmentId}`;
+        
+        if (navigator.share) {
+            navigator.share({
+                text: shareText,
+            })
+                .then(() => console.log("Shared successfully"))
+                .catch((error) => console.log("Sharing failed", error));
+        } else {
+            navigator.clipboard.writeText(`${window.location.origin}/attemptquiz/${assessmentId}`).then(() => {
+                alert("Quiz URL copied to clipboard!");
+            }).catch((error) => {
+                console.error("Failed to copy URL: ", error);
+                alert("Failed to copy URL to clipboard.");
+            });
+        }
+    };
 
     if (!quizData) {
         return (
@@ -208,6 +227,13 @@ const QuizResults = () => {
                 >
                     <Home className="mr-2 h-4 w-4" />
                     Home
+                </button>
+                <button
+                    className="px-6 py-3 bg-slate-800 hover:bg-slate-700 text-white font-medium rounded-lg shadow-lg transition-all duration-300 flex items-center"
+                    onClick={handleShare}
+                >
+                    <Share2 className="mr-2 h-4 w-4" />
+                    Share Quiz
                 </button>
                 <button
                     className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-600 hover:to-indigo-700 text-white font-medium rounded-lg shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 transition-all duration-300 flex items-center"
