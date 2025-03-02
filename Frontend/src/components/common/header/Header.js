@@ -59,8 +59,8 @@ const Header = () => {
                 <Link to="/generatequiz" className="text-slate-300 hover:text-cyan-400 transition-colors">
                 Generate Quiz
                 </Link>
-                <Link to="#features" className="text-slate-300 hover:text-cyan-400 transition-colors">
-                Features
+                <Link to="/exploreQuiz" className="text-slate-300 hover:text-cyan-400 transition-colors">
+                Explore Quiz
                 </Link>
                 <Link to="#audience" className="text-slate-300 hover:text-cyan-400 transition-colors">
                 For Who

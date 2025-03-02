@@ -12,6 +12,7 @@ import Profile from "./components/pages/profile/Profile";
 import GenerateQuiz from "./components/pages/quiz/GenerateQuiz";
 import QuizAttempt from "./components/pages/quiz/QuizAttempt";
 import QuizResults from "./components/pages/quiz/QuizResults";
+import ExploreQuiz from "./components/pages/quiz/ExploreQuiz";
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
                         <Routes>
                             {/* Public Routes - No Auth Needed */}
                             <Route path="/" element={<Home />} />
+                            <Route path="/exploreQuiz" element={<ExploreQuiz/>}/>
 
 
                             {/* Unauthenticated Routes - Only Accessible When Logged Out */}

@@ -5,8 +5,12 @@ const userAxiosInstance1 = userAuthenticatedAxiosInstance(
 );
 const userAxiosInstance2 = userAuthenticatedAxiosInstance(
     "/api/v1/assessmentResult"
-);const userAxiosInstance3 = userAuthenticatedAxiosInstance(
+);
+const userAxiosInstance3 = userAuthenticatedAxiosInstance(
     "/api/v1/chatbot"
+);
+const userAxiosInstance4 = userAuthenticatedAxiosInstance(
+    "/api/v1/exploreAssessment"
 );
 
 const REACT_APP_BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -159,6 +163,42 @@ const askAssessment = async (assessmentId, question) => {
     }
 };
 
+const getAllAssessments = async () => {
+    try {
+        const accessToken = localStorage.getItem("accessToken");
+        const response = await userAxiosInstance4.get("/all", {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+            withCredentials: true,
+        });
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching assessments:", error);
+        throw error;
+    }
+};
+
+const searchAssessments = async (query, difficulty, type) => {
+    try {
+        const accessToken = localStorage.getItem("accessToken");
+        let url = `/search?query=${query || ''}`;
+        if (difficulty) url += `&difficulty=${difficulty}`;
+        if (type) url += `&type=${type}`;
+
+        const response = await userAxiosInstance4.get(url, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+            withCredentials: true,
+        });
+        return response.data;
+    } catch (error) {
+        console.error("Error searching assessments:", error);
+        throw error;
+    }
+};
+
 export {
     generateQuizFromYoutube,
     generateQuizFromMedia,
@@ -166,4 +206,6 @@ export {
     submitQuiz,
     fetchQuizData,
     askAssessment,
+    getAllAssessments,
+    searchAssessments,
 };
