@@ -53,8 +53,8 @@ const Header = () => {
 
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center space-x-8">
-                <Link to="#about" className="text-slate-300 hover:text-cyan-400 transition-colors">
-                About
+                <Link to="/" className="text-slate-300 hover:text-cyan-400 transition-colors">
+                Home
                 </Link>
                 <Link to="/generatequiz" className="text-slate-300 hover:text-cyan-400 transition-colors">
                 Generate Quiz

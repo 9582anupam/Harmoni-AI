@@ -13,10 +13,9 @@ import GenerateQuiz from "./components/pages/quiz/GenerateQuiz";
 import QuizAttempt from "./components/pages/quiz/QuizAttempt";
 import QuizResults from "./components/pages/quiz/QuizResults";
 import ExploreQuiz from "./components/pages/quiz/ExploreQuiz";
-
+import LeaderBoard from "./components/pages/quiz/LeaderBoard";
 
 function App() {
-
 
     return (
         <BrowserRouter>
@@ -36,6 +35,7 @@ function App() {
                             {/* Public Routes - No Auth Needed */}
                             <Route path="/" element={<Home />} />
                             <Route path="/exploreQuiz" element={<ExploreQuiz/>}/>
+                            <Route path="/leaderboard" element={<LeaderBoard />} />
 
 
                             {/* Unauthenticated Routes - Only Accessible When Logged Out */}

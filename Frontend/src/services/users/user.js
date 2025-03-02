@@ -18,3 +18,24 @@ export const updateUserProfile = async (userData) => {
         throw error;
     }
 };
+
+
+
+export const getLeaderboard = async () => {
+    try {
+        const accessToken = localStorage.getItem("accessToken");
+        const response = await userAxiosInstance.get(
+            `/leaderboard`,
+            {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                },
+                withCredentials: true,
+            }
+        );
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching leaderboard:", error);
+        throw error;
+    }
+};
