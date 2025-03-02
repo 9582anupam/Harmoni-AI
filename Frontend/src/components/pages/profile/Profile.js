@@ -354,13 +354,22 @@ const QuizResultCard = ({ quiz, isCreated = false }) => {
                 )}
                 
                 {/* Action Button */}
+                <div className='flex flex-col gap-4'>
                 <Link
                     to={`/attemptquiz/${quiz.id}`}
                     className={`w-full text-center py-2 px-4 rounded-lg bg-gradient-to-r ${isCreated ? 'from-green-500 to-emerald-700' : 'from-cyan-500 to-blue-700'} text-white font-medium flex items-center justify-center`}
                 >
-                    {isCreated ? 'View Created Quiz' : 'View Details'}
+                    Reattempt Quiz
                     <ArrowRight className="h-4 w-4 ml-1" />
                 </Link>
+                <Link
+                    to={`/quizResults/${quiz.id}`}
+                    className={`w-full text-center py-2 px-4 rounded-lg bg-gradient-to-r ${isCreated ? 'from-green-500 to-emerald-700' : 'from-cyan-500 to-blue-700'} text-white font-medium flex items-center justify-center`}
+                >
+                    View Result
+                    <ArrowRight className="h-4 w-4 ml-1" />
+                </Link>
+                </div>
             </div>
         </div>
     );

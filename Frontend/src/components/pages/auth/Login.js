@@ -166,7 +166,7 @@ function Login() {
 
     return (
         <ThemeProvider theme={theme}>
-            <div className="h-[calc(100svh-5rem)] flex justify-center items-center bg-slate-950">
+            <div className="h-[calc(100svh-5rem)] flex justify-center items-center bg-slate-950 text-white">
                 <Container component="main" maxWidth="xs" className="relative">
                     <StyledPaper elevation={3}>
                         <div className="flex items-center w-full relative">
