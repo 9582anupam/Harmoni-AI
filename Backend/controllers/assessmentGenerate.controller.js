@@ -13,6 +13,7 @@ import convertVideoToAudio from '../helper/convertVideoToAudio.js';
 import { extractTextFromPdfFile } from '../helper/pdfToText.js';
 import { extractTextFromPptFile } from '../helper/pptToText.js';
 import { saveAssessment } from '../helper/saveAssessment.js';
+import User from "../models/user.model.js";
 
 // Setup paths
 const __filename = fileURLToPath(import.meta.url);
@@ -180,6 +181,12 @@ const generateAssessmentFromYoutube = async (req, res) => {
                 },
                 { userId }
             );
+
+            // Add assessment to user's created assessments
+            await User.findByIdAndUpdate(
+                userId,
+                { $addToSet: { assessmentCreated: savedAssessment._id } }
+            );
         } catch (dbError) {
             console.error('Failed to save to database:', dbError);
             // Continue even if database save fails
@@ -330,6 +337,12 @@ const generateAssessmentFromMedia = async (req, res) => {
                         transcript: JSON.stringify(transcript)
                     },
                     { userId }
+                );
+
+                // Add assessment to user's created assessments
+                await User.findByIdAndUpdate(
+                    userId,
+                    { $addToSet: { assessmentCreated: savedAssessment._id } }
                 );
             } catch (dbError) {
                 console.error('Failed to save to database:', dbError);
@@ -507,6 +520,12 @@ const generateAssessmentFromDocument = async (req, res) => {
                         title,
                         description: `Assessment based on ${documentMetadata.documentType} document with ${documentMetadata.pageCount || documentMetadata.slideCount || 'multiple'} pages.`
                     }
+                );
+
+                // Add assessment to user's created assessments
+                await User.findByIdAndUpdate(
+                    userId,
+                    { $addToSet: { assessmentCreated: savedAssessment._id } }
                 );
             } catch (dbError) {
                 console.error('Failed to save to database:', dbError);

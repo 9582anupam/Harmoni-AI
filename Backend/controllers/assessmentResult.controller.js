@@ -1,6 +1,7 @@
 import Assessment from "../models/assessment.model.js";
 import AssessmentResult from "../models/assessmentResult.model.js";
 import mongoose from "mongoose";
+import User from "../models/user.model.js";
 
 /**
  * Submit user's assessment result and save to database
@@ -73,6 +74,14 @@ export const submitAssessmentResult = async (req, res) => {
     // Save result to database
     const savedResult = await assessmentResult.save();
 
+    // Update the token in user too
+    const user = await User.findById(userId);
+    if (user) {
+        user.tokens = (user.tokens || 0) + score; // Add new tokens to existing tokens
+        user.assessmentAttempted = [...new Set([...user.assessmentAttempted || [], assessmentId])]; // Add to attempted array
+        await user.save();
+    }
+
     // Update assessment's attemptedBy array if user hasn't attempted before
     if (!assessment.attemptedBy.includes(userId)) {
       assessment.attemptedBy.push(userId);
@@ -114,7 +123,7 @@ export const getResultByUserAndAssessmentId = async (req, res) => {
     });
 
     if (!result) {
-      return res.status(404).json({
+      return res.status(405).json({
         success: false,
         message: "Result not found",
       });
@@ -123,7 +132,7 @@ export const getResultByUserAndAssessmentId = async (req, res) => {
     const assessment = await Assessment.findById(assessmentId);
 
     if (!assessment) {
-      return res.status(404).json({
+      return res.status(405).json({
         success: false,
         message: "Assessment not found",
       });
